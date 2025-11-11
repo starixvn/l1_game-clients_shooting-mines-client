@@ -266,7 +266,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 84,
+      "width": 92,
       "height": 54
     },
     "_anchorPoint": {
@@ -416,6 +416,7 @@
     "nodeSelectedBg": {
       "__id__": 1
     },
+    "nodeDisabledLayer": null,
     "_id": ""
   },
   {
