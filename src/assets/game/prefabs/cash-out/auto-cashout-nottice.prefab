@@ -149,7 +149,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -12.578125,
+      "x": -8.986328125,
       "y": 0,
       "z": 0
     },
@@ -190,7 +190,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 243.625,
+      "width": 152.265625,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -229,8 +229,8 @@
     "_string": "Auto cash out in",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 32,
-    "_fontSize": 32,
+    "_actualFontSize": 20,
+    "_fontSize": 20,
     "_fontFamily": "Arial",
     "_lineHeight": 30,
     "_overflow": 0,
@@ -306,8 +306,6 @@
       "__id__": 0
     },
     "fileId": "66+qywXVxA05OdAxlXGZqu",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -333,7 +331,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 124.8125,
+      "x": 79.1328125,
       "y": 0,
       "z": 0
     },
@@ -374,7 +372,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 19.15625,
+      "width": 11.97265625,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -413,8 +411,8 @@
     "_string": "5",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 32,
-    "_fontSize": 32,
+    "_actualFontSize": 20,
+    "_fontSize": 20,
     "_fontFamily": "Arial",
     "_lineHeight": 30,
     "_overflow": 0,
@@ -486,7 +484,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 268.78125,
+      "width": 170.23828125,
       "height": 100
     },
     "_anchorPoint": {
