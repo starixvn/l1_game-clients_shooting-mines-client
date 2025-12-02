@@ -291,7 +291,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 0.5,
       "y": 0.5
     },
     "_id": ""
@@ -323,7 +323,7 @@
       "a": 255
     },
     "_string": "ARGENTINA",
-    "_horizontalAlign": 0,
+    "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 56,
     "_fontSize": 56,
