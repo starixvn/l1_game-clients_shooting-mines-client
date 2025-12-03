@@ -7,6 +7,8 @@ import { NullRoundTimeHandlers } from "./handlers/null-round-time-handlers";
 import * as InstantWinFeature from "./index";
 import { GameStateStore } from "./mines/game-state/game-state-store";
 import { GameStateHandler } from "./mines/game-state/game-state-handler";
+import { MinesGameStore } from "./mines/mines-game/mines-game-store";
+import { MinesGameHandler } from "./mines/mines-game/mines-game-handler";
 
 export const containerOptions: gc.IContainerOptions = {
     globalContainer: sharedContainer,
@@ -19,6 +21,10 @@ export const containerOptions: gc.IContainerOptions = {
         // Mines 遊戲狀態管理
         container.bind(GameStateStore).to(GameStateStore);
         container.bind(GameStateHandler).to(GameStateHandler);
+
+        // Mines 遊戲核心邏輯
+        container.bind(MinesGameStore).to(MinesGameStore);
+        container.bind(MinesGameHandler).to(MinesGameHandler);
     },
     features: [
         CrashGameV2,

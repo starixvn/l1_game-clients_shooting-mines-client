@@ -8,6 +8,7 @@ export * from "./interruption-handlers";
 
 // Mines 遊戲模組
 export * as GameState from "./mines/game-state";
+export * as MinesGame from "./mines/mines-game";
 export * from "./mines/select-team";
 
 export const FEATURE_NAME = "crash-turn-based";
