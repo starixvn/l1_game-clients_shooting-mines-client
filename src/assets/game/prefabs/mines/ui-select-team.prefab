@@ -308,7 +308,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 573.582,
+      "y": 545.676,
       "z": 0
     },
     "_lrot": {
@@ -348,7 +348,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 639.35546875,
+      "width": 511.484375,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -378,7 +378,7 @@
     "_string": "CLICK TO CHOOSE YOUR TEAM !",
     "_horizontalAlign": 0,
     "_verticalAlign": 0,
-    "_fontSize": 40,
+    "_fontSize": 32,
     "_fontColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -542,8 +542,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -53,
-      "y": 450,
+      "x": -40,
+      "y": 420,
       "z": 0
     },
     "_lrot": {
@@ -633,7 +633,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 680,
+      "width": 640,
       "height": 80
     },
     "_anchorPoint": {
@@ -878,7 +878,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 680,
+      "width": 640,
       "height": 80
     },
     "_anchorPoint": {
@@ -910,7 +910,7 @@
     },
     "_left": 0,
     "_right": -580,
-    "_top": 182,
+    "_top": 180,
     "_bottom": 460.236,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -970,8 +970,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 44.415,
+      "y": 362.724,
       "z": 0
     },
     "_lrot": {
@@ -1020,8 +1020,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 38.75200000000001,
-      "y": 385.2359999999999,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -1179,8 +1179,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 127,
-      "y": 385.2359999999999,
+      "x": 80,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -1257,7 +1257,7 @@
       "a": 255
     },
     "_string": "5",
-    "_horizontalAlign": 1,
+    "_horizontalAlign": 2,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
     "_fontSize": 30,
@@ -2000,8 +2000,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 53,
-      "y": -311.688,
+      "x": 40,
+      "y": -300,
       "z": 0
     },
     "_lrot": {
@@ -2091,7 +2091,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 680,
+      "width": 640,
       "height": 80
     },
     "_anchorPoint": {
@@ -2375,7 +2375,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 680,
+      "width": 640,
       "height": 80
     },
     "_anchorPoint": {
@@ -2408,7 +2408,7 @@
     "_left": 0,
     "_right": 0,
     "_top": -440.236,
-    "_bottom": 320.312,
+    "_bottom": 300,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -2436,8 +2436,6 @@
       "__id__": 0
     },
     "fileId": "66a4gPKIRCxbM5U32vsqdA",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -2470,8 +2468,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": -145,
+      "y": -365,
       "z": 0
     },
     "_lrot": {
@@ -2520,8 +2518,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -165.028,
-      "y": -378.027,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -2679,8 +2677,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -79.226,
-      "y": -380.473,
+      "x": 85,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -2757,7 +2755,7 @@
       "a": 255
     },
     "_string": "5",
-    "_horizontalAlign": 1,
+    "_horizontalAlign": 2,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
     "_fontSize": 30,
@@ -2920,8 +2918,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 185.86,
-      "y": -117.07299999999998,
+      "x": 185,
+      "y": -85,
       "z": 0
     },
     "_lrot": {
@@ -3101,8 +3099,6 @@
       "__id__": 0
     },
     "fileId": "a7DeNKIsBLHoRx2iwLEq+B",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -3173,7 +3169,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -555.974,
+      "y": -535,
       "z": 0
     },
     "_lrot": {
@@ -3213,7 +3209,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 450,
+      "width": 410,
       "height": 110
     },
     "_anchorPoint": {

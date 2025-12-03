@@ -31,14 +31,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 33
+        "__id__": 35
       },
       {
-        "__id__": 35
+        "__id__": 37
       }
     ],
     "_prefab": {
-      "__id__": 37
+      "__id__": 39
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -440,6 +440,9 @@
       },
       {
         "__id__": 31
+      },
+      {
+        "__id__": 33
       }
     ],
     "removedComponents": []
@@ -539,6 +542,27 @@
     ]
   },
   {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 34
+    },
+    "propertyPath": [
+      "_contentSize"
+    ],
+    "value": {
+      "__type__": "cc.Size",
+      "width": 329.79296875,
+      "height": 70.56
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "549UL2xYpMELdw+cgtMkbP",
+      "b2QWjx1y1COI7LyocaKFBu"
+    ]
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -548,7 +572,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 34
+      "__id__": 36
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -576,7 +600,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 36
+      "__id__": 38
     },
     "_alignFlags": 45,
     "_target": null,
@@ -614,10 +638,10 @@
     "instance": null,
     "targetOverrides": [
       {
-        "__id__": 38
+        "__id__": 40
       },
       {
-        "__id__": 41
+        "__id__": 43
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -635,7 +659,7 @@
       "__id__": 10
     },
     "sourceInfo": {
-      "__id__": 39
+      "__id__": 41
     },
     "propertyPath": [
       "player"
@@ -644,7 +668,7 @@
       "__id__": 10
     },
     "targetInfo": {
-      "__id__": 40
+      "__id__": 42
     }
   },
   {
@@ -665,7 +689,7 @@
       "__id__": 10
     },
     "sourceInfo": {
-      "__id__": 42
+      "__id__": 44
     },
     "propertyPath": [
       "enemies"
@@ -674,7 +698,7 @@
       "__id__": 10
     },
     "targetInfo": {
-      "__id__": 43
+      "__id__": 45
     }
   },
   {
