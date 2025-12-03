@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "betting-area",
+    "_name": "bet-amount-selector",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "betting-area",
+    "_name": "bet-amount-selector",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -1675,7 +1675,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 786,
+      "width": 720,
       "height": 200
     },
     "_anchorPoint": {
@@ -1772,7 +1772,6 @@
       "__id__": 0
     },
     "fileId": "afZSX01F9B4oztH7sS7F8B",
-    "instance": null,
     "targetOverrides": null
   }
 ]

@@ -31,14 +31,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 31
+        "__id__": 33
       },
       {
-        "__id__": 33
+        "__id__": 35
       }
     ],
     "_prefab": {
-      "__id__": 35
+      "__id__": 37
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -136,8 +136,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 786,
-      "height": 1344
+      "width": 720,
+      "height": 1280
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -356,7 +356,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -437,6 +437,9 @@
       },
       {
         "__id__": 30
+      },
+      {
+        "__id__": 31
       }
     ],
     "removedComponents": []
@@ -511,7 +514,29 @@
     "propertyPath": [
       "_active"
     ],
-    "value": false
+    "value": true
+  },
+  {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 32
+    },
+    "propertyPath": [
+      "_lpos"
+    ],
+    "value": {
+      "__type__": "cc.Vec3",
+      "x": -157.5517578125,
+      "y": 45,
+      "z": 0
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "549UL2xYpMELdw+cgtMkbP",
+      "00sFOf/AhGH62Uke5CWRGL"
+    ]
   },
   {
     "__type__": "cc.UITransform",
@@ -523,12 +548,12 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 32
+      "__id__": 34
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 786,
-      "height": 1344
+      "width": 720,
+      "height": 1280
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -551,7 +576,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 34
+      "__id__": 36
     },
     "_alignFlags": 45,
     "_target": null,
@@ -567,8 +592,8 @@
     "_isAbsBottom": true,
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
-    "_originalWidth": 786,
-    "_originalHeight": 1344,
+    "_originalWidth": 720,
+    "_originalHeight": 1280,
     "_alignMode": 2,
     "_lockFlags": 0,
     "_id": ""
@@ -589,10 +614,10 @@
     "instance": null,
     "targetOverrides": [
       {
-        "__id__": 36
+        "__id__": 38
       },
       {
-        "__id__": 39
+        "__id__": 41
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -610,7 +635,7 @@
       "__id__": 10
     },
     "sourceInfo": {
-      "__id__": 37
+      "__id__": 39
     },
     "propertyPath": [
       "player"
@@ -619,7 +644,7 @@
       "__id__": 10
     },
     "targetInfo": {
-      "__id__": 38
+      "__id__": 40
     }
   },
   {
@@ -640,7 +665,7 @@
       "__id__": 10
     },
     "sourceInfo": {
-      "__id__": 40
+      "__id__": 42
     },
     "propertyPath": [
       "enemies"
@@ -649,7 +674,7 @@
       "__id__": 10
     },
     "targetInfo": {
-      "__id__": 41
+      "__id__": 43
     }
   },
   {
