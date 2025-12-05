@@ -15,8 +15,6 @@ export class GameStateStore {
     private _stateData: IGameStateData = {
         selectedTeam: null,
         betAmount: 0,
-        currentMultiplier: 1,
-        revealedPositions: [],
         winAmount: 0,
         isFailed: false,
     };
@@ -42,8 +40,6 @@ export class GameStateStore {
         this._stateData = {
             selectedTeam: null,
             betAmount: 0,
-            currentMultiplier: 1,
-            revealedPositions: [],
             winAmount: 0,
             isFailed: false,
         };

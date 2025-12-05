@@ -16,18 +16,16 @@ export class MineBoard extends ObserverComponent {
     teamAway: Node = null;
 
 
-    @render(MinesGameStore, (store) => store.clickedPositions, { fireImmediately: false })
-    onClickedPositionsChanged(clickedPositions: number) {
-        this.handleTileRevealed(clickedPositions);
+    @render(MinesGameStore, (store) => store.clickedPosition, { fireImmediately: false })
+    onClickedPositionChanged(clickedPosition: number) {
+        this.handleTileRevealed(clickedPosition);
     }
 
     private handleTileRevealed(position: number) {
-        console.log('[MineBoard] Tile revealed:', position);
         const test = this.teamHome.getChildByName(`player-${position}`);
         if (test) {
             test.active = true;
         }
-
     }
 
 }

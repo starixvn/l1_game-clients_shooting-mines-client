@@ -11,8 +11,6 @@ export enum GameState {
 export interface IGameStateData {
     selectedTeam: string | null;   // 選擇的隊伍 (PLAYER | ENEMIES)
     betAmount: number;             // 下注金額
-    currentMultiplier: number;     // 當前倍數
-    revealedPositions: number[];   // 已揭開的位置
     winAmount: number;             // 贏得的金額
     isFailed: boolean;             // 是否失敗
 }
