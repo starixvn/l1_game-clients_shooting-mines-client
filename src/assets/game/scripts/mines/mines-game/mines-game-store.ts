@@ -33,6 +33,7 @@ export class MinesGameStore {
     opponentPositions: number[] = [];        // 對手球員位置（從 API 獲取）
     selectedPositions: number[] = [];        // 已選擇的位置（已揭開的格子）
     starPosition: number = -1;               // 星星位置（特殊格子）
+    clickedPositions: number = -1;        // 已點擊的位置（已點擊的格子）
 
     currentMultiplier: number = 1.0;         // 當前倍數
     nextMultiplier: number = 1.5;            // 下一個倍數

@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "f448981a-0a14-4f0d-a2f3-df0fb11f5b7f",
+  "uuid": "506d5f8f-8b8b-4be5-b87b-4ea403af57ec",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "ball"
+    "syncNodeName": "mine-board"
   }
 }

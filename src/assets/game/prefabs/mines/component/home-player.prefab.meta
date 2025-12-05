@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "34bce39e-b67a-4e16-a00d-4eb25aa1a2b7",
+  "uuid": "d6f8f945-0b8c-4638-bd20-cdfa7a510a13",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "grid-container"
+    "syncNodeName": "home-player"
   }
 }

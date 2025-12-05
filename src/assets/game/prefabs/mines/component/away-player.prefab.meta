@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "00b568de-3795-4af9-a060-2472d96af8d5",
+  "uuid": "61ff13be-0b52-43c1-a849-bc7d074dab2a",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "shoot-button"
+    "syncNodeName": "away-player"
   }
 }

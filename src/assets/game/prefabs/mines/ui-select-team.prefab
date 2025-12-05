@@ -457,7 +457,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "player",
+    "_name": "home-player",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -1358,7 +1358,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "player-img",
+    "_name": "home-img",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -1915,7 +1915,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "enemies",
+    "_name": "away-player",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -2436,6 +2436,8 @@
       "__id__": 0
     },
     "fileId": "66a4gPKIRCxbM5U32vsqdA",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -2894,7 +2896,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "enemies-img",
+    "_name": "away-img",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -3099,6 +3101,8 @@
       "__id__": 0
     },
     "fileId": "a7DeNKIsBLHoRx2iwLEq+B",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {

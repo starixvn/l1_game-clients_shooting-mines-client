@@ -110,63 +110,12 @@ export class MinesGameHandler {
      * @param position 格子位置 (0-19)
      * @returns Promise<'player' | 'opponent' | 'star' | null>
      */
-    async handleTileClick(position: number): Promise<'player' | 'opponent' | 'star' | null> {
-        // 檢查遊戲狀態
-        if (this.gameStateStore.currentState !== GameState.PlayGame) {
-            console.warn('[MinesGameHandler] Cannot click tile, game not in PlayGame state');
-            return null;
-        }
-
-        // 檢查是否已結算
-        if (this.minesGameStore.isSettle) {
-            console.warn('[MinesGameHandler] Game already settled');
-            return null;
-        }
-
-        // 檢查格子是否已經揭開
-        if (this.minesGameStore.selectedPositions.includes(position)) {
-            console.warn('[MinesGameHandler] Tile already revealed', position);
-            return null;
-        }
+    async handleTileClick(position: number) {
+        console.log("🚀 ~ position:", position)
 
         console.log('[MinesGameHandler] Tile clicked', position);
-
-        try {
-            // TODO: 向服務器發送揭開格子請求
-            const requestData: RevealTileRequestData = {
-                position: position,
-            };
-
-            // const apiResponse = await this.requestRevealTile(requestData);
-
-            // 模擬服務器響應延遲
-            await this.delay(100);
-
-            // 模擬服務器返回的倍數（之後從 API 獲取）
-            const newMultiplier = this.calculateMultiplier(
-                this.minesGameStore.safeReveals + 1
-            );
-
-            // 揭開格子
-            const result = this.minesGameStore.revealTile(position, newMultiplier);
-
-            if (result === 'player') {
-                // 揭開我方球員 - 安全
-                this.handleSafeReveal();
-            } else if (result === 'opponent') {
-                // 揭開對手球員 - 失敗
-                this.handleGameLose();
-            } else if (result === 'star') {
-                // 揭開星星 - 特殊獎勵
-                this.handleStarReveal();
-            }
-
-            return result;
-
-        } catch (error) {
-            console.error('[MinesGameHandler] Failed to reveal tile', error);
-            return null;
-        }
+        this.minesGameStore.clickedPositions = position;
+    
     }
 
     /**

@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "67306bf6-1f6f-49d9-98ac-915e0d2c945f",
+  "uuid": "1c85a9ed-3204-4d66-8cc3-3b2e6a692b71",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "players-layer"
+    "syncNodeName": "mines"
   }
 }
