@@ -16,9 +16,9 @@ export class MineBoard extends ObserverComponent {
     teamAway: Node = null;
 
 
-    @render(MinesGameStore, (store) => store.clickedPosition, { fireImmediately: false })
-    onClickedPositionChanged(clickedPosition: number) {
-        this.handleTileRevealed(clickedPosition);
+    @render(MinesGameStore, (store) => store.lastClickedPosition, { fireImmediately: false })
+    onClickedPositionChanged(lastClickedPosition: number) {
+        this.handleTileRevealed(lastClickedPosition);
     }
 
     private handleTileRevealed(position: number) {

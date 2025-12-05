@@ -19,7 +19,7 @@ export class GameStateHandler {
         this.gameStateStore.updateStateData({
             selectedTeam: team,
         });
-        this.gameStateStore.setState(GameState.BetSection);
+        this.setGameState(GameState.BetSection);
     }
 
     // 下注完成 → 開始遊戲
@@ -43,6 +43,10 @@ export class GameStateHandler {
     restart() {
         this.gameStateStore.reset();
         this.startGame();
+    }
+
+    setGameState(state: GameState) {
+        this.gameStateStore.setState(state);
     }
 
     // 返回選隊階段

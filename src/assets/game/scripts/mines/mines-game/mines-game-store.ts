@@ -4,7 +4,8 @@ import mobx from 'mobx';
 const { injectable } = inversify;
 
 /**
- * Mines 遊戲核心數據 Store（精簡版）
+ * Mines 遊戲核心數據 Store
+ * 只儲存遊戲內部狀態，不直接處理 API 格式
  */
 @injectable()
 export class MinesGameStore {
@@ -13,23 +14,24 @@ export class MinesGameStore {
     }
 
     // ==================== 遊戲配置 ====================
-    readonly gridSize = 20;                  // 20 格子 (4x5 或 5x4)
+    readonly GRID_SIZE = 20;                     // 20 格子
 
-    // ==================== API 數據 ====================
-    roundId: number = 0;                     // 當前回合 ID
-    mode: number = 3;                        // 遊戲模式/難度
+    // ==================== 遊戲回合資訊 ====================
+    currentRoundId: number = 0;                  // 當前回合 ID
+    hasBetPlaced: boolean = false;               // 是否已經下注（同步狀態）
 
-    // ==================== 遊戲數據 ====================
-    playerPositions: number[] = [];          // 我方球員位置
-    opponentPositions: number[] = [];        // 對手球員位置
-    selectedPositions: number[] = [];        // 已選擇的位置
-    clickedPosition: number = -1;            // 當前點擊的位置
+    // ==================== 遊戲內部狀態 ====================
+    myPositions: number[] = [];                  // 我方球員位置（安全格子）
+    enemyPositions: number[] = [];               // 對手球員位置（地雷）
+    revealedPositions: number[] = [];            // 已揭開的位置
+    lastClickedPosition: number = -1;            // 最後點擊的位置
 
-    currentMultiplier: number = 1.0;         // 當前倍數
-    winAmount: number = 0;                   // 當前贏得金額
+    currentOdds: number = 1.0;                   // 當前倍數
+    currentWinAmount: number = 0;                // 當前贏得金額
 
     // ==================== 遊戲結果 ====================
-    gameResult: 'win' | 'lose' | null = null;  // 遊戲結果
+    isGameOver: boolean = false;                 // 遊戲是否結束
+    isWin: boolean = false;                      // 是否贏（true=贏, false=輸）
 
     // ==================== 計算屬性 ====================
 
@@ -37,80 +39,97 @@ export class MinesGameStore {
      * 是否可以兌現
      */
     get canCashOut(): boolean {
-        return this.selectedPositions.length > 0 && this.gameResult === null;
+        return this.revealedPositions.length > 0 && !this.isGameOver;
     }
 
     /**
      * 是否已經揭開過該位置
      */
     isPositionRevealed(position: number): boolean {
-        return this.selectedPositions.includes(position);
+        return this.revealedPositions.includes(position);
+    }
+
+    /**
+     * 已揭開的安全格子數量
+     */
+    get safeRevealCount(): number {
+        return this.revealedPositions.filter(pos =>
+            this.myPositions.includes(pos)
+        ).length;
     }
 
     // ==================== 遊戲數據操作 ====================
 
     /**
-     * 初始化遊戲（從 API 數據初始化）
+     * 初始化新遊戲
      */
-    initGameFromApi(apiData: {
-        roundId: number;
-        mode: number;
-        result: {
-            playerPositions: number[];
-            opponentPositions: number[];
-        };
-    }) {
-        this.roundId = apiData.roundId;
-        this.mode = apiData.mode;
-        this.playerPositions = apiData.result.playerPositions;
-        this.opponentPositions = apiData.result.opponentPositions;
-        this.selectedPositions = [];
-        this.clickedPosition = -1;
-        this.currentMultiplier = 1.0;
-        this.winAmount = 0;
-        this.gameResult = null;
+    initializeGame(roundId: number, myPositions: number[], enemyPositions: number[]) {
+        console.log('[MinesGameStore] initializeGame ->', { roundId, myPositions, enemyPositions });
+        this.currentRoundId = roundId;
+        this.hasBetPlaced = true;            // 標記已下注
+        this.myPositions = myPositions;
+        this.enemyPositions = enemyPositions;
+        this.revealedPositions = [];
+        this.lastClickedPosition = -1;
+        this.currentOdds = 1.0;
+        this.currentWinAmount = 0;
+        this.isGameOver = false;
+        this.isWin = false;
     }
 
     /**
-     * 揭開格子
+     * 記錄點擊的位置
      */
-    revealTile(position: number, winAmount: number, odds: number): 'player' | 'opponent' {
-        if (this.selectedPositions.includes(position)) {
-            return this.playerPositions.includes(position) ? 'player' : 'opponent';
+    setClickedPosition(position: number) {
+        console.log('[MinesGameStore] setClickedPosition ->', position);
+        this.lastClickedPosition = position;
+    }
+
+    /**
+     * 揭開格子並更新狀態
+     */
+    revealPosition(position: number, winAmount: number, odds: number) {
+        console.log('[MinesGameStore] revealPosition ->', { position, winAmount, odds });
+        // 加入已揭開列表
+        if (!this.revealedPositions.includes(position)) {
+            this.revealedPositions.push(position);
         }
 
-        this.selectedPositions.push(position);
-        this.winAmount = winAmount;
-        this.currentMultiplier = odds;
+        // 更新金額和倍數
+        this.currentWinAmount = winAmount;
+        this.currentOdds = odds;
 
-        if (this.playerPositions.includes(position)) {
-            return 'player';
-        } else {
-            this.gameResult = 'lose';
-            return 'opponent';
+        // 檢查是否踩到地雷
+        if (this.enemyPositions.includes(position)) {
+            this.isGameOver = true;
+            this.isWin = false;
         }
     }
 
     /**
-     * 執行 Cash Out
+     * 兌現（遊戲勝利）
      */
-    cashOut(winAmount: number) {
-        this.gameResult = 'win';
-        this.winAmount = winAmount;
+    cashOut(finalWinAmount: number) {
+        console.log('[MinesGameStore] cashOut ->', finalWinAmount);
+        this.currentWinAmount = finalWinAmount;
+        this.isGameOver = true;
+        this.isWin = true;
     }
 
     /**
      * 重置所有數據
      */
     reset() {
-        this.roundId = 0;
-        this.mode = 3;
-        this.playerPositions = [];
-        this.opponentPositions = [];
-        this.selectedPositions = [];
-        this.clickedPosition = -1;
-        this.currentMultiplier = 1.0;
-        this.winAmount = 0;
-        this.gameResult = null;
+        console.log('[MinesGameStore] reset');
+        this.currentRoundId = 0;
+        this.hasBetPlaced = false;           // 重置下注狀態
+        this.myPositions = [];
+        this.enemyPositions = [];
+        this.revealedPositions = [];
+        this.lastClickedPosition = -1;
+        this.currentOdds = 1.0;
+        this.currentWinAmount = 0;
+        this.isGameOver = false;
+        this.isWin = false;
     }
 }

@@ -1,18 +1,25 @@
+import gc from "@sg/game-client-base";
 import inversify from 'inversify';
 import { MinesGameStore } from './mines-game-store';
 import { GameStateStore } from '../game-state/game-state-store';
 import { GameStateHandler } from '../game-state/game-state-handler';
-import { BetRequestData, RevealTileRequestData, CashOutRequestData } from './types';
+import {
+    ApiSelectTeamRequest,
+    ApiBetRequest,
+    ApiBetResponse,
+    ApiMineRequest,
+    ApiMineResponse,
+    ApiCashOutRequest,
+} from './types';
+import Observer from 'observer';
+import { GameState } from '../game-state/game-state';
 
 const { injectable, inject } = inversify;
-
-/**
- * Mines 遊戲邏輯 Handler（精簡版）
- */
+const { handle } = Observer;
 @injectable()
-export class MinesGameHandler {
+export class MinesGameHandler implements gc.Shared.IMultipleHandlers {
     @inject(MinesGameStore)
-    private minesGameStore: MinesGameStore;
+    private gameStore: MinesGameStore;
 
     @inject(GameStateStore)
     private gameStateStore: GameStateStore;
@@ -20,161 +27,143 @@ export class MinesGameHandler {
     @inject(GameStateHandler)
     private gameStateHandler: GameStateHandler;
 
-    // ==================== 遊戲初始化 ====================
+    @inject(gc.Connection.ConnectionStore)
+    private connectionStore: gc.Connection.ConnectionStore;
 
-    /**
-     * 開始新遊戲
-     */
-    async startNewGame(betAmount: number, selectedTeam: string, mode: number = 3) {
-        console.log('[MinesGameHandler] Starting new game', { betAmount, selectedTeam, mode });
 
-        try {
-            // TODO: 向服務器發送下注請求
-            const requestData: BetRequestData = {
-                amount: betAmount,
-                mode: mode,
-                selectedTeam: selectedTeam,
-            };
+    @handle(GameStateHandler, (handler, state: GameState) => handler.setGameState(state))
+    private setGameState(state: GameState) {
+        return state;
+    }
 
-            // const apiResponse = await this.requestBet(requestData);
+    // ==================== 事件處理列表（處理 WebSocket 事件）====================
+    eventHandleList = [
+        {
+            name: 'bet_response',
+            handle: this.onBetResponse
+        },
+        {
+            name: 'mine_response',
+            handle: this.onMineResponse
+        },
+    ];
 
-            // 模擬 API 響應（之後替換為真實 API 調用）
-            const mockApiResponse = {
-                roundId: 12345,
-                mode: mode,
-                result: {
-                    playerPositions: [0, 1, 2, 5, 8, 10, 12, 15, 16, 18],
-                    opponentPositions: [3, 4, 7, 9, 13, 14, 17, 19],
-                },
-            };
+    handleTeamSelected(team: string) {
+        const isHomeTeam = team === 'PLAYER' || team === 'home';
 
-            this.minesGameStore.initGameFromApi(mockApiResponse);
-            this.gameStateHandler.onBetPlaced(betAmount);
+        this.sendSelectTeamRequest(isHomeTeam);
 
-            console.log('[MinesGameHandler] Game initialized');
+        this.gameStateHandler.onTeamSelected(team);
+    }
 
-        } catch (error) {
-            console.error('[MinesGameHandler] Failed to start game', error);
+    handleTileClick(position: number) {
+        this.gameStore.setClickedPosition(position);
+
+        const hasBetPlaced = this.gameStore.hasBetPlaced;
+
+        if (!hasBetPlaced) {
+            this.setGameState(GameState.PlayGame);
+            this.sendBetRequest(position);
+            this.gameStore.hasBetPlaced = true;
+        } else {
+            this.sendMineRequest(position);
         }
     }
 
-    // ==================== 格子點擊邏輯 ====================
-
     /**
-     * 處理格子點擊
+     * 處理兌現按鈕（由 UI 透過 @handle 調用）
      */
-    async handleTileClick(position: number) {
-        console.log('[MinesGameHandler] Tile clicked', position);
-        this.minesGameStore.clickedPosition = position;
-        // try {
-        //     // TODO: 向服務器發送揭開格子請求
-        //     const requestData: RevealTileRequestData = {
-        //         position: position,
-        //         roundId: this.minesGameStore.roundId,
-        //     };
-
-        //     // const apiResponse = await this.requestRevealTile(requestData);
-
-        //     // 模擬 API 響應
-        //     const mockResponse = {
-        //         winAmount: 100,
-        //         odds: 1.5,
-        //         opponentPositions: this.minesGameStore.opponentPositions,
-        //     };
-
-        //     // 揭開格子
-        //     const result = this.minesGameStore.revealTile(
-        //         position,
-        //         mockResponse.winAmount,
-        //         mockResponse.odds
-        //     );
-
-        //     // if (result === 'opponent') {
-        //     //     // 遊戲失敗
-        //     //     this.gameStateHandler.onGameEnd(0, true);
-        //     // }
-
-        // } catch (error) {
-        //     console.error('[MinesGameHandler] Failed to reveal tile', error);
-        // }
+    handleCashOut() {
+        this.sendCashOutRequest();
     }
 
-    // ==================== Cash Out ====================
+    private sendSelectTeamRequest(isHomeTeam: boolean) {
+        const apiRequest: ApiSelectTeamRequest = {
+            isHomeTeam: isHomeTeam,
+        };
 
-    /**
-     * 處理玩家 Cash Out
-     */
-    async handleCashOut() {
-        if (!this.minesGameStore.canCashOut) {
-            console.warn('[MinesGameHandler] Cannot cash out');
-            return;
-        }
-
-        console.log('[MinesGameHandler] Cash out');
-
-        try {
-            // TODO: 向服務器發送 Cash Out 請求
-            const requestData: CashOutRequestData = {
-                roundId: this.minesGameStore.roundId,
-            };
-
-            // const apiResponse = await this.requestCashOut(requestData);
-
-            // 模擬 API 響應
-            const mockResponse = {
-                winAmount: this.minesGameStore.winAmount,
-                balance: 5000,
-            };
-
-            this.minesGameStore.cashOut(mockResponse.winAmount);
-            this.gameStateHandler.onGameEnd(mockResponse.winAmount, false);
-
-            console.log('[MinesGameHandler] Cash out success');
-
-        } catch (error) {
-            console.error('[MinesGameHandler] Failed to cash out', error);
-        }
+        // this.sendWebSocket('selectTeam', apiRequest);
     }
 
-    // ==================== 遊戲重置 ====================
-
-    /**
-     * 重新開始遊戲
-     */
-    restartGame() {
-        console.log('[MinesGameHandler] Restart game');
-        this.minesGameStore.reset();
-        this.gameStateHandler.backToTeamSelection();
-    }
-
-    /**
-     * 繼續遊戲（使用相同設定）
-     */
-    async continueGame() {
-        console.log('[MinesGameHandler] Continue game');
-
+    private sendBetRequest(position: number) {
         const betAmount = this.gameStateStore.stateData.betAmount;
-        const selectedTeam = this.gameStateStore.stateData.selectedTeam;
-        const mode = this.minesGameStore.mode;
 
-        this.minesGameStore.reset();
-        await this.startNewGame(betAmount, selectedTeam, mode);
+        const apiRequest: ApiBetRequest = {
+            action: 'bet',
+            amount: betAmount,
+            selectedPosition: position,
+        };
+
+        console.log('[MinesGameHandler] → Sending bet request:', apiRequest);
+        // this.sendWebSocket('bet', apiRequest);
     }
 
-    // ==================== 服務器通訊（預留）====================
+    /**
+     * 發送揭開格子請求（後續格子）
+     */
+    private sendMineRequest(position: number) {
+        const apiRequest: ApiMineRequest = {
+            action: 'mine',
+            selectedPosition: position,
+            roundId: this.gameStore.currentRoundId,
+        };
 
-    // private async requestBet(requestData: BetRequestData): Promise<any> {
-    //     // TODO: 實作服務器通訊
-    //     throw new Error('Not implemented');
-    // }
+        console.log('[MinesGameHandler] → Sending mine request:', apiRequest);
+        // this.sendWebSocket('mine', apiRequest);
+    }
 
-    // private async requestRevealTile(requestData: RevealTileRequestData): Promise<any> {
-    //     // TODO: 實作服務器通訊
-    //     throw new Error('Not implemented');
-    // }
+    /**
+     * 發送兌現請求
+     */
+    private sendCashOutRequest() {
+        const apiRequest: ApiCashOutRequest = {
+            roundId: this.gameStore.currentRoundId,
+        };
 
-    // private async requestCashOut(requestData: CashOutRequestData): Promise<any> {
-    //     // TODO: 實作服務器通訊
-    //     throw new Error('Not implemented');
-    // }
+        console.log('[MinesGameHandler] → Sending cashout request:', apiRequest);
+        // this.sendWebSocket('cashout', apiRequest);
+    }
+
+    onBetResponse(apiResponse: ApiBetResponse) {
+        const myPositions = [0];
+
+        this.gameStore.initializeGame(
+            apiResponse.roundId,
+            myPositions,
+            apiResponse.opponentPositions
+        );
+
+        // 揭開第一個格子（就是剛點擊的位置）
+        const firstPosition = this.gameStore.lastClickedPosition;
+        this.gameStore.revealPosition(
+            firstPosition,
+            apiResponse.winAmount,
+            apiResponse.odds
+        );
+
+    }
+
+    /**
+     * 處理揭開格子回應（由 eventHandleList 自動調用）
+     */
+    onMineResponse(apiResponse: ApiMineResponse) {
+        const clickedPosition = this.gameStore.lastClickedPosition;
+
+        this.gameStore.revealPosition(
+            clickedPosition,
+            apiResponse.winAmount,
+            apiResponse.odds
+        );
+
+        // 檢查遊戲狀態
+        if (this.gameStore.isGameOver && !this.gameStore.isWin) {
+            // 踩到地雷 → 遊戲失敗
+            console.log('[MinesGameHandler] Game over - hit enemy');
+            this.gameStateHandler.onGameEnd(0, true);
+        } else {
+            // 安全格子 → 繼續遊戲
+            console.log('[MinesGameHandler] Safe tile revealed, continue playing');
+        }
+    }
+
 }
