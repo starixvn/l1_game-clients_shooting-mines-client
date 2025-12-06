@@ -31,11 +31,6 @@ export class MinesGameHandler implements gc.Shared.IMultipleHandlers {
     private connectionStore: gc.Connection.ConnectionStore;
 
 
-    @handle(GameStateHandler, (handler, state: GameState) => handler.setGameState(state))
-    private setGameState(state: GameState) {
-        return state;
-    }
-
     // ==================== 事件處理列表（處理 WebSocket 事件）====================
     eventHandleList = [
         {
@@ -62,7 +57,7 @@ export class MinesGameHandler implements gc.Shared.IMultipleHandlers {
         const hasBetPlaced = this.gameStore.hasBetPlaced;
 
         if (!hasBetPlaced) {
-            this.setGameState(GameState.PlayGame);
+            this.gameStateHandler.setGameState(GameState.PlayGame);
             this.sendBetRequest(position);
             this.gameStore.hasBetPlaced = true;
         } else {
