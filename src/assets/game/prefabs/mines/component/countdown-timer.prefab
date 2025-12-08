@@ -357,7 +357,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 17.796875,
+      "width": 17.796867228945622,
       "height": 40.32
     },
     "_anchorPoint": {
@@ -396,7 +396,7 @@
     "_string": "0",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 32,
+    "_actualFontSize": 37.7,
     "_fontSize": 32,
     "_fontFamily": "Arial",
     "_lineHeight": 32,
@@ -500,12 +500,12 @@
     },
     "totalTime": 10,
     "radius": 42,
-    "ringWidth": 8,
+    "ringWidth": 10,
     "progressColor": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 165,
-      "b": 0,
+      "r": 242,
+      "g": 175,
+      "b": 39,
       "a": 255
     },
     "bgColor": {
@@ -533,10 +533,7 @@
     "__prefab": {
       "__id__": 23
     },
-    "_customMaterial": {
-      "__uuid__": "ffb54b0a-924d-4e26-9475-565d07d28443",
-      "__expectedType__": "cc.Material"
-    },
+    "_customMaterial": null,
     "_srcBlendFactor": 2,
     "_dstBlendFactor": 4,
     "_color": {
@@ -554,8 +551,8 @@
       "b": 0,
       "a": 255
     },
-    "_lineJoin": 1,
-    "_lineCap": 1,
+    "_lineJoin": 0,
+    "_lineCap": 0,
     "_fillColor": {
       "__type__": "cc.Color",
       "r": 92,
@@ -579,7 +576,6 @@
       "__id__": 0
     },
     "fileId": "2aMJDtb5JHmankBPjqBYgq",
-    "instance": null,
     "targetOverrides": null
   }
 ]

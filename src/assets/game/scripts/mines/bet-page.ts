@@ -10,19 +10,14 @@ const { render } = Observer;
 @ccclass('BetPage')
 export class BetPage extends ObserverComponent {
     @property(Node)
-    betAmountSelector: Node = null;
+    betSectionState: Node = null;
 
     @property(Node)
-    reSelectTeamButton: Node = null;
+    playGameState: Node = null;
 
     @render(GameStateStore, (store) => store.currentState, { fireImmediately: true })
     onGameStateChange(currentState: GameState) {
-        const isBetSection = currentState === GameState.BetSection;
-        if (this.betAmountSelector) {
-            this.betAmountSelector.active = isBetSection;
-        }
-        if (this.reSelectTeamButton) {
-            this.reSelectTeamButton.active = isBetSection;
-        }
+        this.betSectionState.active = currentState === GameState.BetSection;
+        this.playGameState.active = currentState === GameState.PlayGame;
     }
 }
